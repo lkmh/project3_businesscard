@@ -41,6 +41,8 @@ app.post('/users/register', userController.register)
 app.get('/users/login', userController.showLoginForm)
 app.post('/users/login', userController.login)
 app.post('/users/logout', userController.logout)
+
+// should this be a profile route ?
 app.get('/users/profile', auth_Middleware.isAuthenticated, userController.showProfile)
 
 

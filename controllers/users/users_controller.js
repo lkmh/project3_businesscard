@@ -1,6 +1,9 @@
 const bcrypt = require('bcrypt')
 const userModel = require('../../models/users/users')
 const userValidators = require('../validators/users')
+const rfidModel = require('../../models/rfid/rfid')
+// const userValidators = require('../validators/users')
+
 
 const controller = {
 
@@ -9,10 +12,12 @@ const controller = {
     },
 
     register: async (req, res) => {
+        console.log("register")
         // validations
         const validationResults = userValidators.registerValidator.validate(req.body)
 
         if (validationResults.error) {
+            console.log('validation error')
             res.send(validationResults.error)
             return
         }
@@ -24,29 +29,33 @@ const controller = {
             res.send('passwords do not match')
             return
         }
-
+        //object containing the result userModel.findOne({serial: validatedResults.serial})
         // ensure that serial number is in the database
-        if (validatedResults.serial !== validatedResults.confirm_password) {
-            res.send('serial number not valid')  // can direct to purchase page 
-            return
-        }
-        // ensure that serial number is in the database (to do2. )
+        console.log('model',rfidModel.findOne({rfid: validatedResults.rfid}))
+
+        // ensure that serial number is in the database (to do2. ) amend this 
         try {
-            isSerial = await userModel.findOne({serial: validatedResults.serial})
+            isValidRfid = await rfidModel.findOne({rfid: validatedResults.rfid})
         } catch (err) {
-            res.send('serial number not valid')
+            res.send('RFID not Valid')
             return
         }
+
+        // check if RFID is in use 
+
+
 
         // hash the password
         const hash = await bcrypt.hash(validatedResults.password, 10)
 
-        // create the user and store in db
+        // create the user and store in db => not storing 
         try {
             await userModel.create({
-                name: validatedResults.fullname,
+                rfid: validatedResults.rfid,
                 email: validatedResults.email,
                 hash: hash,
+                name: validatedResults.name,
+                contact: validatedResults.contact,
             })
         } catch(err) {
             console.log(err)
@@ -67,7 +76,7 @@ const controller = {
 
         let user = null
 
-        // get user with email from DB
+        // get user with email from DB 
         try {
             user = await userModel.findOne({email: validatedResults.email})
         } catch (err) {

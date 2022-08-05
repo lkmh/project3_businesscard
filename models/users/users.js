@@ -1,9 +1,9 @@
 const mongoose = require('mongoose')
 
 const userSchema = new mongoose.Schema({
-    name: {
+    rfid: {
         type: String,
-        required: true
+        required: true,
     },
     email: {
         type: String,
@@ -14,6 +14,25 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    name: {
+        type: String,
+        required: true
+    },
+    contact: {
+        type: String,
+        required: true
+    },
+    telegramId: {
+        type: String,
+    },
+    IGId: {
+        type: String,
+    },
+    whatapp: {
+        type: String,
+    },
+
+
 })
 
 const User = mongoose.model('User', userSchema)

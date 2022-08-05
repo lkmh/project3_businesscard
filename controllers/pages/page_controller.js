@@ -1,7 +1,7 @@
 const controller = {
 
     showHome: (req, res) => {
-        res.render('pages/home')
+        res.render('pages/login')
     },
 
     showContact: (req, res) => {
