@@ -25,6 +25,19 @@ const controller = {
             return
         }
 
+        // ensure that serial number is in the database
+        if (validatedResults.serial !== validatedResults.confirm_password) {
+            res.send('serial number not valid')  // can direct to purchase page 
+            return
+        }
+        // ensure that serial number is in the database (to do2. )
+        try {
+            isSerial = await userModel.findOne({serial: validatedResults.serial})
+        } catch (err) {
+            res.send('serial number not valid')
+            return
+        }
+
         // hash the password
         const hash = await bcrypt.hash(validatedResults.password, 10)
 
@@ -91,10 +104,6 @@ const controller = {
                 res.redirect('/users/profile')
             })
           })
-    },
-
-    showDashboard: (req, res) => {
-        res.send('welcome to your protected dashboard')
     },
 
     showProfile: async (req, res) => {
