@@ -2,8 +2,6 @@ const userModel = require('../../models/users/users')
 const userValidators = require('../validators/users')
 const rfidModel = require('../../models/rfid/rfid')
 
-
-
 const controller = {
     showInternalProfile: async (req, res) => {
         const userId = req.session.userId
@@ -27,26 +25,27 @@ const controller = {
     },
     editInternalProfile: async (req,res) => {
         const userId = req.session.userId
-        console.log(userId)
-        console.log("edit",req.body)
-        // validations
         const validationResults = userValidators.updateValidator.validate(req.body)
-
         if (validationResults.error) {
             console.log('validation error')
             res.send(validationResults.error)
             return
         }
         const validatedResults = validationResults.value
-        console.log('results',validatedResults)        
+        const before_profile = await userModel.findById(userId)
+        console.log('Before', before_profile)
+        console.log('Data to add',validatedResults)        
         const updateDocument = await userModel.findOneAndUpdate({_id:userId}, validatedResults, {new: true})
-        console.log(updateDocument)
+        console.log('After',updateDocument)
         res.redirect('/profile')
     },
     showExternalProfile: async (req,res) => {
         const userRfid = req.params.rfid
         const profile = await userModel.findOne({rfid: userRfid})
-        console.log(profile)
+        if (!profile) {
+            res.send("profile not found")
+            return
+        }
         res.render('profile/externalprofile', {profile})
     },
     deleteInternalProfile: async (req,res) => {

@@ -126,21 +126,6 @@ const controller = {
           })
     },
 
-    // showProfile: async (req, res) => {
-    //     // get user data from db using session user
-    //     let user = null
-
-    //     try {
-    //         user = await userModel.findOne({email: req.session.user})
-    //     } catch(err) {
-    //         console.log(err)
-    //         res.redirect('/users/login')
-    //         return
-    //     }
-
-    //     res.render('users/profile', {user})
-    // },
-
     logout: async (req, res) => {
         req.session.user = null
 

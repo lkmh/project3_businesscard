@@ -22,13 +22,13 @@ const userSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    telegramId: {
+    telegram: {
         type: String,
     },
-    IGId: {
+    instagram: {
         type: String,
     },
-    whatapp: {
+    whatsapp: {
         type: String,
     },
 
