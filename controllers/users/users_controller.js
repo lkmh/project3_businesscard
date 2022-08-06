@@ -29,21 +29,22 @@ const controller = {
             res.send('passwords do not match')
             return
         }
-        //object containing the result userModel.findOne({serial: validatedResults.serial})
-        // ensure that serial number is in the database
-        console.log('model',rfidModel.findOne({rfid: validatedResults.rfid}))
+        isEmailUsed = await userModel.findOne({email: validatedResults.email})
 
-        // ensure that serial number is in the database (to do2. ) amend this 
-        try {
-            isValidRfid = await rfidModel.findOne({rfid: validatedResults.rfid})
-        } catch (err) {
-            res.send('RFID not Valid')
+        if (isEmailUsed) {
+            res.send('Email is in use')
             return
         }
 
-        // check if RFID is in use 
-
-
+        // ensure that serial number is in the database (to do2. ) amend this 
+        
+        const rfidDocument = await rfidModel.findOneAndUpdate({rfid: validatedResults.rfid, inUsed: false }, {inUsed: true}, {new: true})
+        
+        if (!rfidDocument) {
+            console.log(rfidDocument)
+            res.send('RFID not Valid, please purchase one from the store')
+            return
+        }
 
         // hash the password
         const hash = await bcrypt.hash(validatedResults.password, 10)
@@ -72,14 +73,23 @@ const controller = {
 
     login: async (req, res) => {
         // validations here ...
-        const validatedResults = req.body
+        const validationResults = userValidators.loginValidator.validate(req.body)
+
+        if (validationResults.error) {
+            console.log('validation error')
+            res.send(validationResults.error)
+            return
+        }
+
+        const validatedResults = validationResults.value
 
         let user = null
 
         // get user with email from DB 
-        try {
-            user = await userModel.findOne({email: validatedResults.email})
-        } catch (err) {
+        
+        user = await userModel.findOne({email: validatedResults.email})
+        console.log('isthere data',user)
+        if (!user) {
             res.send('failed to get user')
             return
         }
@@ -91,7 +101,7 @@ const controller = {
             res.send('incorrect password')
             return
         }
-
+        console.log("login successful")
         // log the user in by creating a session
         req.session.regenerate(function (err) {
             if (err) {
@@ -100,7 +110,8 @@ const controller = {
             }
         
             // store user information in session, typically a user id
-            req.session.user = user.email
+            console.log(user._id)
+            req.session.userId = user._id
         
             // save the session before redirection to ensure page
             // load does not happen before session is saved
@@ -110,25 +121,25 @@ const controller = {
                     return
                 }
 
-                res.redirect('/users/profile')
+                res.redirect('/profile')
             })
           })
     },
 
-    showProfile: async (req, res) => {
-        // get user data from db using session user
-        let user = null
+    // showProfile: async (req, res) => {
+    //     // get user data from db using session user
+    //     let user = null
 
-        try {
-            user = await userModel.findOne({email: req.session.user})
-        } catch(err) {
-            console.log(err)
-            res.redirect('/users/login')
-            return
-        }
+    //     try {
+    //         user = await userModel.findOne({email: req.session.user})
+    //     } catch(err) {
+    //         console.log(err)
+    //         res.redirect('/users/login')
+    //         return
+    //     }
 
-        res.render('users/profile', {user})
-    },
+    //     res.render('users/profile', {user})
+    // },
 
     logout: async (req, res) => {
         req.session.user = null

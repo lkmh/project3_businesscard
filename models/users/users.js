@@ -19,7 +19,7 @@ const userSchema = new mongoose.Schema({
         required: true
     },
     contact: {
-        type: String,
+        type: Number,
         required: true
     },
     telegramId: {

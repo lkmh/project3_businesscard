@@ -3,6 +3,7 @@ require('dotenv').config()
 const express = require('express')
 const mongoose = require('mongoose')
 const session = require('express-session')
+const methodOverride = require('method-override')
 
 
 const app = express();
@@ -13,6 +14,7 @@ const connStr = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PAS
 const auth_Middleware = require('./middlewares/auth_middleware')
 const userController = require('./controllers/users/users_controller')
 const pageController = require('./controllers/pages/page_controller')
+const profileController = require('./controllers/profiles/profile_controller')
 
 // Set view engine
 app.set('view engine', 'ejs')
@@ -20,20 +22,22 @@ app.set('view engine', 'ejs')
 //this is to convert the data from the form
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'))
+app.use(methodOverride('X-HTTP-Method-Override'))
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
-    saveUninitialized: true,
     cookie: { secure: false, httpOnly: false, maxAge: 7200000 }
 }))
 
-app.use(auth_Middleware.setAuthUserVar)
+//app.use(auth_Middleware.setAuthUserVar)
 // app.use(auth_Middleware.isAuthenticated)
 
 
 app.get('/', pageController.showHome)
+
+
 
 // Users Routes
 app.get('/users/register', userController.showRegistrationForm)
@@ -42,8 +46,13 @@ app.get('/users/login', userController.showLoginForm)
 app.post('/users/login', userController.login)
 app.post('/users/logout', userController.logout)
 
-// should this be a profile route ?
-app.get('/users/profile', auth_Middleware.isAuthenticated, userController.showProfile)
+// profile
+app.get('/profile', auth_Middleware.isAuthenticated, profileController.showInternalProfile)
+app.get('/profile/edit', auth_Middleware.isAuthenticated, profileController.showEditInternalProfile)
+app.post('/profile/edit', auth_Middleware.isAuthenticated, profileController.editInternalProfile)
+app.post('/profile/delete', auth_Middleware.isAuthenticated, profileController.deleteInternalProfile)
+// External 
+app.get('/:rfid', profileController.showExternalProfile)
 
 
 app.listen(port, async () => {
