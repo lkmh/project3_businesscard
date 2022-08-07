@@ -1,7 +1,7 @@
-
+<!-- 
 <form method="POST" action="/users/logout">
     <button type="submit">Logout</button>
-  </form>
+  </form> -->
 
 <!-- <div id="page-profile">
     <div class="container my-5">
@@ -38,12 +38,21 @@ style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/
   <div class="card" style="border-radius: 15px;">
     <div class="card-body p-5">
       <h2 class="text-uppercase text-center mb-3">Your Profile</h2>
-
-      <p class="text-center text-muted mb-3 mb-0"><a href="/profile/edit"
+      <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+      <a href="/profile/edit" ><button type="button" class="btn btn-primary">Update</button></a>
+      <a href="/<%= profile.rfid %>" ><button type="button" class="btn btn-success">Public View</button></a>
+      <form method="POST" action="/profile/delete">
+        <button type="submit" class="btn btn-danger">Delete</button>
+      </form>
+      <form method="POST" action="/users/logout">
+        <button type="submit" class="btn btn-warning">Logout</button>
+      </form>
+    </div>
+      <!-- <p class="text-center text-muted mb-3 mb-0"><a href="/profile/edit"
         class="fw-bold text-body"><u>Update your data</u></a></p>
 
         <p class="text-center text-muted mb-3 mb-0"><a href="/<%= profile.rfid %>"
-          class="fw-bold text-body"><u>Public View</u></a></p>
+          class="fw-bold text-body"><u>Public View</u></a></p> -->
 
 
       <form method="POST" action="/profile/edit">
@@ -51,7 +60,7 @@ style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/
         <div class="form-outline mb-2">
           <label class="form-label" for="form3Example1cg">Name</label>
           <input name="name" value=<%= profile.name %> readonly type="text" id="form3Example1cg" class="form-control form-control-lg" />
-          
+
         </div>
 
         
@@ -89,11 +98,6 @@ style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/
             <% } %>
         </div>
       </form>
-        <div class="d-flex justify-content-center mb-1 mb-0 ">
-          <form method="POST" action="/profile/delete">
-            <button type="submit">Delete Profile</button>
-          </form>
-        </div>
 
         
       

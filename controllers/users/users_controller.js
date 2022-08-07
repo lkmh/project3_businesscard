@@ -18,7 +18,8 @@ const controller = {
         console.log(req.body)
         if (validationResults.error) {
             console.log('validation error')
-            res.send(validationResults.error)
+            // res.send(validationResults.error)
+            res.render('pages/error')
             return
         }
 
@@ -26,13 +27,15 @@ const controller = {
         
         // ensure that password and confirm_password matches
         if (validatedResults.password !== validatedResults.confirm_password) {
-            res.send('passwords do not match')
+            // res.send('passwords do not match')
+            res.render('pages/error')
             return
         }
         isEmailUsed = await userModel.findOne({email: validatedResults.email})
 
         if (isEmailUsed) {
-            res.send('Email is in use')
+            // res.send('Email is in use')
+            res.render('pages/error')
             return
         }
 
@@ -60,7 +63,8 @@ const controller = {
             })
         } catch(err) {
             console.log(err)
-            res.send('failed to create user')
+            // res.send('failed to create user')
+            res.render('pages/error')
             return
         }
 
@@ -77,7 +81,8 @@ const controller = {
 
         if (validationResults.error) {
             console.log('validation error')
-            res.send(validationResults.error)
+            // res.send(validationResults.error)
+            res.render('pages/error')
             return
         }
 
@@ -90,7 +95,8 @@ const controller = {
         user = await userModel.findOne({email: validatedResults.email})
         console.log('isthere data',user)
         if (!user) {
-            res.send('failed to get user')
+            // res.send('failed to get user')
+            res.render('pages/error')
             return
         }
 
@@ -98,14 +104,16 @@ const controller = {
         const pwMatches = await bcrypt.compare(validatedResults.password, user.hash)
 
         if (!pwMatches) {
-            res.send('incorrect password')
+            // res.send('incorrect password')
+            res.render('pages/error')
             return
         }
         console.log("login successful")
         // log the user in by creating a session
         req.session.regenerate(function (err) {
             if (err) {
-                res.send('unable to regenerate session')
+                // res.send('unable to regenerate session')
+                res.render('pages/error')
                 return
             }
         
@@ -117,7 +125,8 @@ const controller = {
             // load does not happen before session is saved
             req.session.save(function (err) {
                 if (err) {
-                    res.send('unable to save session')
+                    // res.send('unable to save session')
+                    res.render('pages/error')
                     return
                 }
 

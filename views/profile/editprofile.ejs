@@ -1,6 +1,6 @@
-<form method="POST" action="/users/logout">
+<!-- <form method="POST" action="/users/logout">
   <button type="submit">Logout</button>
-</form>
+</form> -->
 
 
 <!-- <form method="POST" action="/profile/edit">
@@ -28,8 +28,14 @@
         <div class="col-12 col-md-9 col-lg-7 col-xl-6">
           <div class="card" style="border-radius: 15px;">
             <div class="card-body p-5">
-              <h2 class="text-uppercase text-center mb-3">Edit Your Profile</h2>
-
+              <h2 class="text-uppercase text-center mb-3">Update Your Profile</h2>
+              <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                <a href="/profile/edit" ><button type="button" class="btn btn-primary">Reset</button></a>
+                <a href="/profile" ><button type="button" class="btn btn-success">No changes</button></a>
+                <form method="POST" action="/users/logout">
+                  <button type="submit" class="btn btn-warning">Logout</button>
+                </form>
+              </div>
               <form method="POST" action="/profile/edit">
                 
                 <div class="form-outline mb-2">
@@ -78,11 +84,14 @@
                   <input type="submit" Value="Update Data" >
                 </div>
 
-                <p class="text-center text-muted mb-1 mb-0">Reset Inputs <a href="/profile/edit"
-                  class="fw-bold text-body"><u>Back</u></a></p>
 
+
+
+                <!-- <p class="text-center text-muted mb-1 mb-0">Reset Inputs <a href="/profile/edit"
+                  class="fw-bold text-body"><u>Back</u></a></p> -->
+<!-- 
                 <p class="text-center text-muted mb-1 mb-0">Go back without updating <a href="/profile"
-                    class="fw-bold text-body"><u>Back</u></a></p>
+                    class="fw-bold text-body"><u>Back</u></a></p> -->
 
               </form>
 
@@ -93,3 +102,12 @@
     </div>
   </div>
 </section>
+
+
+<div class="d-grid gap-2 d-md-flex justify-content-md-center">
+  <a href="/profile/edit" ><button type="button" class="btn btn-primary">Update your data</button></a>
+  <a href="/<%= profile.rfid %>" ><button type="button" class="btn btn-success">Public View</button></a>
+  <form method="POST" action="/profile/delete">
+    <button type="submit" class="btn btn-danger">Delete Profile</button>
+  </form>
+</div>

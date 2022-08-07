@@ -27,7 +27,16 @@ body {
         font-size: 15px;
         background: #060606;
         background: linear-gradient(to top left,hsl(245, 96%, 29%), #2fa4d7);
-    }
+}
+
+
+.error-card {
+    
+    background: #84fab0;
+    margin-left: auto;
+    margin-right: auto;
+
+}
     
 .ext-profile-pic {
     display: block;
