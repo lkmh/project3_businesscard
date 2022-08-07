@@ -3,7 +3,7 @@
     <button type="submit">Logout</button>
   </form>
 
-<div id="page-profile">
+<!-- <div id="page-profile">
     <div class="container my-5">
         <h1>Welcome to your profile</h1>
         <h1>Name: <%= profile.name %> </h1>
@@ -19,6 +19,79 @@
     <form method="POST" action="/profile/delete">
         <button type="submit">Delete resource</button>
       </form>
-</div>
+</div> -->
 
+
+<link rel="stylesheet" href="style.css" />
+<link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+    crossorigin="anonymous"
+/>
+<section class="vh-100 bg-image"
+style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp');">
+<div class="mask d-flex align-items-center h-100 gradient-custom-3">
+<div class="container h-100">
+<div class="row d-flex justify-content-center align-items-center h-100">
+<div class="col-12 col-md-9 col-lg-7 col-xl-6">
+  <div class="card" style="border-radius: 15px;">
+    <div class="card-body p-5">
+      <h2 class="text-uppercase text-center mb-3">Your Profile</h2>
+
+      <p class="text-center text-muted mb-3 mb-0"><a href="/profile/edit"
+        class="fw-bold text-body"><u>Update your data</u></a></p>
+
+        <p class="text-center text-muted mb-3 mb-0"><a href="/<%= profile.rfid %>"
+          class="fw-bold text-body"><u>Public View</u></a></p>
+
+
+      <form method="POST" action="/profile/edit">
+        
+        <div class="form-outline mb-2">
+          <label class="form-label" for="form3Example1cg">Name</label>
+          <input name="name" value=<%= profile.name %> readonly type="text" id="form3Example1cg" class="form-control form-control-lg" />
+          
+        </div>
+
+        
+        <div class="form-outline mb-2">
+          <label class="form-label" for="form3Example3cg">Contact</label>
+          <input  name="contact" value=<%= profile.contact %> readonly type="string" id="form3Example3cg" class="form-control form-control-lg" />
+        </div>
+
+      
+        <div class="form-outline mb-2">
+          <label class="form-label" for="form3Example4cg">Whatsapp</label>
+          <input name="whatsapp" value=<%= profile.whatsapp %> readonly type="string" id="form3Example4cg" class="form-control form-control-lg" />
+        </div>
+        
+        <div class="form-outline mb-2">
+          <label class="form-label" for="form3Example4cdg">Telegram</label>
+          <input  name="telegram" value=<%= profile.telegram %> readonly type="string" id="form3Example4cdg" class="form-control form-control-lg" />
+          
+        </div>
+        
+        <div class="form-outline mb-2">
+           <label class="form-label" for="form3Example1cg">Instagram</label>
+          <input name="instagram" value=<%= profile.instagram %> readonly type="text" id="form3Example1cg" class="form-control form-control-lg" />
+         
+        </div>
+      </form>
+        <div class="d-flex justify-content-center mb-1 mb-0 ">
+          <form method="POST" action="/profile/delete">
+            <button type="submit">Delete Profile</button>
+          </form>
+        </div>
+
+        
+      
+
+    </div>
+  </div>
+</div>
+</div>
+</div>
+</div>
+</section>
 
