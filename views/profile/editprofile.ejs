@@ -47,19 +47,31 @@
               
                 <div class="form-outline mb-2">
                   <label class="form-label" for="form3Example4cg">Whatsapp</label>
-                  <input name="whatsapp" value=<%= profile.whatsapp %> type="string" id="form3Example4cg" class="form-control form-control-lg" />
+                
+                  <% if ( profile.whatsapp ) { %>
+                    <input name="whatsapp" value=<%= profile.whatsapp %> type="string" id="form3Example4cg" class="form-control form-control-lg" />
+                    <%} else { %>
+                      <input name="whatsapp" type="string" id="form3Example4cg" class="form-control form-control-lg" />
+                    <% } %>
                 </div>
                 
                 <div class="form-outline mb-2">
                   <label class="form-label" for="form3Example4cdg">Telegram</label>
-                  <input  name="telegram" value=<%= profile.telegram %>  type="string" id="form3Example4cdg" class="form-control form-control-lg" />
-                  
+                  <% if ( profile.telegram ) { %>
+                    <input  name="telegram" value=<%= profile.telegram %>  type="string" id="form3Example4cdg" class="form-control form-control-lg" />
+                    <%} else { %>
+                      <input  name="telegram"  type="string" id="form3Example4cdg" class="form-control form-control-lg" />
+                    <% } %>
                 </div>
                 
                 <div class="form-outline mb-2">
                    <label class="form-label" for="form3Example1cg">Instagram</label>
-                  <input name="instagram" value=<%= profile.instagram %> type="text" id="form3Example1cg" class="form-control form-control-lg" />
-                 
+
+                   <% if ( profile.instagram ) { %>
+                    <input name="instagram" value=<%= profile.instagram %> type="text" id="form3Example1cg" class="form-control form-control-lg" />
+                    <%} else { %>
+                      <input name="instagram" type="text" id="form3Example1cg" class="form-control form-control-lg" />  
+                    <% } %>
                 </div>
 
                 <div class="d-flex justify-content-center mb-1 mb-0 ">

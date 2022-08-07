@@ -60,22 +60,33 @@ style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/
           <input  name="contact" value=<%= profile.contact %> readonly type="string" id="form3Example3cg" class="form-control form-control-lg" />
         </div>
 
-      
         <div class="form-outline mb-2">
           <label class="form-label" for="form3Example4cg">Whatsapp</label>
-          <input name="whatsapp" value=<%= profile.whatsapp %> readonly type="string" id="form3Example4cg" class="form-control form-control-lg" />
+        
+          <% if ( profile.whatsapp ) { %>
+            <input name="whatsapp" value=<%= profile.whatsapp %> readonly type="string" id="form3Example4cg" class="form-control form-control-lg" />
+            <%} else { %>
+              <input name="whatsapp" type="string" readonly id="form3Example4cg" class="form-control form-control-lg" />
+            <% } %>
         </div>
         
         <div class="form-outline mb-2">
           <label class="form-label" for="form3Example4cdg">Telegram</label>
-          <input  name="telegram" value=<%= profile.telegram %> readonly type="string" id="form3Example4cdg" class="form-control form-control-lg" />
-          
+          <% if ( profile.telegram ) { %>
+            <input  name="telegram" value=<%= profile.telegram %>  readonly type="string" id="form3Example4cdg" class="form-control form-control-lg" />
+            <%} else { %>
+              <input  name="telegram"  readonly type="string" id="form3Example4cdg" class="form-control form-control-lg" />
+            <% } %>
         </div>
         
         <div class="form-outline mb-2">
            <label class="form-label" for="form3Example1cg">Instagram</label>
-          <input name="instagram" value=<%= profile.instagram %> readonly type="text" id="form3Example1cg" class="form-control form-control-lg" />
-         
+
+           <% if ( profile.instagram ) { %>
+            <input name="instagram" value=<%= profile.instagram %> readonly type="text" id="form3Example1cg" class="form-control form-control-lg" />
+            <%} else { %>
+              <input name="instagram" readonly type="text" id="form3Example1cg" class="form-control form-control-lg" />  
+            <% } %>
         </div>
       </form>
         <div class="d-flex justify-content-center mb-1 mb-0 ">
