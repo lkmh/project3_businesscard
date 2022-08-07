@@ -15,7 +15,7 @@ const controller = {
         console.log("register")
         // validations
         const validationResults = userValidators.registerValidator.validate(req.body)
-
+        console.log(req.body)
         if (validationResults.error) {
             console.log('validation error')
             res.send(validationResults.error)
@@ -23,7 +23,7 @@ const controller = {
         }
 
         const validatedResults = validationResults.value
-
+        
         // ensure that password and confirm_password matches
         if (validatedResults.password !== validatedResults.confirm_password) {
             res.send('passwords do not match')

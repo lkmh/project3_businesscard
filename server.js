@@ -5,7 +5,6 @@ const mongoose = require('mongoose')
 const session = require('express-session')
 const methodOverride = require('method-override')
 
-
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -34,10 +33,7 @@ app.use(
 //app.use(auth_Middleware.setAuthUserVar)
 // app.use(auth_Middleware.isAuthenticated)
 
-
 app.get('/', pageController.showHome)
-
-
 
 // Users Routes
 app.get('/users/register', userController.showRegistrationForm)
@@ -51,6 +47,7 @@ app.get('/profile', auth_Middleware.isAuthenticated, profileController.showInter
 app.get('/profile/edit', auth_Middleware.isAuthenticated, profileController.showEditInternalProfile)
 app.post('/profile/edit', auth_Middleware.isAuthenticated, profileController.editInternalProfile)
 app.post('/profile/delete', auth_Middleware.isAuthenticated, profileController.deleteInternalProfile)
+
 // External 
 app.get('/:rfid', profileController.showExternalProfile)
 
