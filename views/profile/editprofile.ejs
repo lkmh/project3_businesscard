@@ -80,8 +80,18 @@
                     <% } %>
                 </div>
 
+                <div class="form-outline mb-2">
+                  <label class="form-label" for="form3Example1cg">url</label>
+        
+                  <% if ( profile.url ) { %>
+                   <input name="url" value=<%= profile.url %> type="text" id="form3Example1cg" class="form-control form-control-lg" />
+                   <%} else { %>
+                     <input name="url" type="text" id="form3Example1cg" class="form-control form-control-lg" />  
+                   <% } %>
+               </div>
+
                 <div class="d-flex justify-content-center mb-1 mb-0 ">
-                  <input type="submit" Value="Update Data" >
+                  <input type="submit" Value="Update Profile" >
                 </div>
 
 
@@ -103,11 +113,11 @@
   </div>
 </section>
 
-
+<!-- 
 <div class="d-grid gap-2 d-md-flex justify-content-md-center">
   <a href="/profile/edit" ><button type="button" class="btn btn-primary">Update your data</button></a>
   <a href="/<%= profile.rfid %>" ><button type="button" class="btn btn-success">Public View</button></a>
   <form method="POST" action="/profile/delete">
     <button type="submit" class="btn btn-danger">Delete Profile</button>
   </form>
-</div>
+</div> -->

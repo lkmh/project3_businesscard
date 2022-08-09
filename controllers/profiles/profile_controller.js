@@ -1,6 +1,15 @@
 const userModel = require('../../models/users/users')
 const userValidators = require('../validators/users')
 const rfidModel = require('../../models/rfid/rfid')
+const ImageKit = require("imagekit")
+
+const imageKit = new ImageKit({
+  publicKey: process.env.IMAGEKIT_PUBLIC_KEY,
+  privateKey: process.env.IMAGEKIT_PRIVATE_KEY,
+  urlEndpoint: process.env.IMAGEKIT_URL_ENDPOINT,
+})
+
+console.log(imageKit)
 
 const controller = {
     showInternalProfile: async (req, res) => {
@@ -57,6 +66,40 @@ const controller = {
         const rfidDocument = await rfidModel.findOneAndUpdate({rfid: user.rfid, inUsed: true }, {inUsed: false}, {new: true})
         res.redirect('/')
     },
+    showUploadPhoto: (req,res) => {
+        const userId = req.session.userId
+        
+        res.render('profile/uploadphoto')
+    },
+    uploadPhoto: async (req,res) => {
+      const userId = req.session.userId
+      const profile = await userModel.findOne({_id: userId})
+        // res.send("succesful")
+        if (req.file) {
+            imageKit.upload({
+              file: req.file.buffer,
+              fileName: req.file.originalname,
+              folder: 'user_avatars'
+            }, function(err, response) {
+              if(err) {
+                return res.status(500).json({
+                  status: "failed",
+                  message: "An error occured during file upload. Please try again."
+                })
+              
+            } else {
+              console.log("pass")
+              const { url } = response
+              profile['url'] = response.thumbnailUrl
+              console.log('profile',profile)
+              res.render('profile/editprofile', {profile})
+              // const updateDocument = userModel.findOneAndUpdate({_id: userId}, {instagram:'test'}, {new: true})
+            
+              // res.send("Successfully uploaded files" );
+              }
+            })
+          }
+    }
 }
 
 module.exports = controller

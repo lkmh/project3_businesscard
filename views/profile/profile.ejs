@@ -57,6 +57,19 @@ style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/
 
       <form method="POST" action="/profile/edit">
         
+        <div style="text-align: center" class="form-outline mb-2">
+          <% if ( profile.url ) { %>
+            <img src=<%= profile.url %>  class="ext-profile-pic">
+            <a href="/profile/uploadphoto">Change</a>
+            <%} else { %>
+              <img src="https://images.generated.photos/aNWVduQrveJoCSYCMqZab1M6yGaAOayiL1IRY5b6jQQ/rs:fit:512:512/wm:0.95:sowe:18:18:0.33/czM6Ly9pY29uczgu/Z3Bob3Rvcy1wcm9k/LnBob3Rvcy92M18w/ODAzNDU1LmpwZw.jpg" class="ext-profile-pic">
+              <a href="/profile/uploadphoto">Upload</a>
+            <% } %>
+        </div>
+
+
+        
+
         <div class="form-outline mb-2">
           <label class="form-label" for="form3Example1cg">Name</label>
           <input name="name" value=<%= profile.name %> readonly type="text" id="form3Example1cg" class="form-control form-control-lg" />
@@ -97,6 +110,16 @@ style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/
               <input name="instagram" readonly type="text" id="form3Example1cg" class="form-control form-control-lg" />  
             <% } %>
         </div>
+
+        <!-- <div class="form-outline mb-2">
+          <label class="form-label" for="form3Example1cg">url</label>
+
+          <% if ( profile.url ) { %>
+           <input name="url" value=<%= profile.url %> readonly type="text" id="form3Example1cg" class="form-control form-control-lg" />
+           <%} else { %>
+             <input name="url" readonly type="text" id="form3Example1cg" class="form-control form-control-lg" />  
+           <% } %>
+       </div> -->
       </form>
 
         

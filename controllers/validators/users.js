@@ -20,6 +20,7 @@ const validators = {
         whatsapp: Joi.string().allow('').allow(null),
         telegram:  Joi.string().allow('').allow(null),
         instagram:  Joi.string().allow('').allow(null),
+        url:  Joi.string().allow('').allow(null),
     }), 
 }
 
