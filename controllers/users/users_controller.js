@@ -2,7 +2,10 @@ const bcrypt = require('bcrypt')
 const userModel = require('../../models/users/users')
 const userValidators = require('../validators/users')
 const rfidModel = require('../../models/rfid/rfid')
+const counterModel = require('../../models/counters')
 // const userValidators = require('../validators/users')
+
+
 
 
 const controller = {
@@ -24,6 +27,7 @@ const controller = {
         }
 
         const validatedResults = validationResults.value
+        validatedResults['url'] = "https://images.generated.photos/aNWVduQrveJoCSYCMqZab1M6yGaAOayiL1IRY5b6jQQ/rs:fit:512:512/wm:0.95:sowe:18:18:0.33/czM6Ly9pY29uczgu/Z3Bob3Rvcy1wcm9k/LnBob3Rvcy92M18w/ODAzNDU1LmpwZw.jpg"
         
         // ensure that password and confirm_password matches
         if (validatedResults.password !== validatedResults.confirm_password) {
@@ -60,6 +64,10 @@ const controller = {
                 hash: hash,
                 name: validatedResults.name,
                 contact: validatedResults.contact,
+                url: validatedResults.url,
+            })
+            await counterModel.create({
+                rfid: validatedResults.rfid,
             })
         } catch(err) {
             console.log(err)

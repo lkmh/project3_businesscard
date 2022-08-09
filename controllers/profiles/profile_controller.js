@@ -1,6 +1,7 @@
 const userModel = require('../../models/users/users')
 const userValidators = require('../validators/users')
 const rfidModel = require('../../models/rfid/rfid')
+const counterModel = require('../../models/counters')
 const ImageKit = require("imagekit")
 
 const imageKit = new ImageKit({
@@ -19,6 +20,9 @@ const controller = {
         // const profile = await userModel.find({email: req.params.email})
         const profile = await userModel.findById(userId)
         console.log(profile)
+        const counterProfile = await counterModel.findOne({rfid: profile.rfid})
+        console.log('count',counterProfile.date)
+        profile.count = counterProfile.date.length
 
         res.render('profile/profile', {profile})
     },
@@ -28,7 +32,6 @@ const controller = {
     
         // const profile = await userModel.find({email: req.params.email})
         const profile = await userModel.findById(userId)
-        console.log(profile)
 
         res.render('profile/editprofile', {profile})
     },
@@ -37,7 +40,7 @@ const controller = {
         const validationResults = userValidators.updateValidator.validate(req.body)
         if (validationResults.error) {
             console.log('validation error')
-            res.send(validationResults.error)
+            res.render('pages/error_update')
             return
         }
         const validatedResults = validationResults.value
@@ -55,6 +58,11 @@ const controller = {
             res.send("profile not found")
             return
         }
+        const countProfileCurrent = await counterModel.findOne({rfid: userRfid})
+        console.log(countProfileCurrent)
+        const newDate = new Date()
+        countProfileCurrent.date.push(newDate)
+        const countProfileUpdate = await counterModel.findOneAndUpdate({rfid:userRfid}, countProfileCurrent, {new: true})
         res.render('profile/externalprofile', {profile})
     },
     deleteInternalProfile: async (req,res) => {

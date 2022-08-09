@@ -17,7 +17,7 @@ const validators = {
     updateValidator: Joi.object({
         name: Joi.string().min(1),
         contact: Joi.number().min(1),
-        whatsapp: Joi.string().allow('').allow(null),
+        whatsapp: Joi.number().allow('').allow(null),
         telegram:  Joi.string().allow('').allow(null),
         instagram:  Joi.string().allow('').allow(null),
         url:  Joi.string().allow('').allow(null),
