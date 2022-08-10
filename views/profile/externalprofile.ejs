@@ -1,48 +1,20 @@
-
-<!-- 
-<div id="page-profile">
-    <div class="container my-5">
-        <h1>External</h1>
-        <h1>Name: <%= profile.name %> </h1>
-        <h1>Contact:  <%= profile.contact %> </h1>
-        <h1> Email Me:  <a href="mailto:<%= profile.email %>"> Email Me</a></h1>
-        <h1> Whatsapp Me:  <a href="whatsapp://send?phone=<%= profile.whatsapp %>">Whatsapp Me</a>  </h1>
-        <h1> Telegram Me:  <a href="https://telegram.me/<%= profile.telegram %>">Telegram Me</a> </h1>
-        <h1> IG Me:  <a href="http://instagram.com/_u/<%= profile.instagram %>">IG Me</a></h1>
-    </div>
-    -->
-</div>
-
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="style.css">
-        <title><%= profile.name %></title>
-    </head>
-<body>
-    <img src=<%= profile.url %> class="ext-profile-pic">
-
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="style.css" />
+    <title><%= profile.name %></title>
+  </head>
+  <body>
+    <img src=<%=profile.url%> class="ext-profile-pic">
     <div class="name"><%= profile.name %></div>
-
     <a href="mailto:<%= profile.email %>" target="_blank" class="links">Email Me</a>
-    
     <% if ( profile.whatsapp ) { %>
-    <a href="whatsapp://send?phone=<%= profile.whatsapp %>" target="_blank"  class="links">Whatsapp</a>
-    <%} else { %>
-    <% } %>
-
-    <% if ( profile.telegram ) { %>
-    <a href="https://telegram.me/<%= profile.telegram %>" target="_blank"  class="links">Telegram</a>
-    <%} else { %>
-    <% } %>
-
-    <% if ( profile.instagram ) { %>
-    <a href="http://instagram.com/_u/<%= profile.instagram %>" target="_blank"  class="links">Instagram</a>
-    <%} else { %>
-    <% } %>
-    
-
-</body>
+    <a href="whatsapp://send?phone=<%= profile.whatsapp %>" target="_blank" class="links">Whatsapp</a>
+    <%} else { %> <% } %> <% if ( profile.telegram ) { %>
+    <a href="https://telegram.me/<%= profile.telegram %>" target="_blank" class="links">Telegram</a>
+    <%} else { %> <% } %> <% if ( profile.instagram ) { %>
+    <a href="http://instagram.com/_u/<%= profile.instagram %>" target="_blank" class="links">Instagram</a>
+    <%} else { %> <% } %>
+  </body>
 </html>

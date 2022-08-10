@@ -26,7 +26,8 @@ body {
         font-family: 'Open Sans', sans-serif;
         font-size: 15px;
         background: #060606;
-        background: linear-gradient(to top left,hsl(245, 96%, 29%), #2fa4d7);
+        background: linear-gradient(to top left,hsl(245, 96%, 29%), #2fa4d7) fixed;
+        background-size: cover;
 }
 
 
@@ -60,6 +61,9 @@ body {
     border-radius: 50%;
 }
 
+.form-label{
+    color: black;
+}
 
 .name {
     text-align: center;

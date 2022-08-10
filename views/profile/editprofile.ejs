@@ -1,135 +1,86 @@
-<!-- <form method="POST" action="/users/logout">
-  <button type="submit">Logout</button>
-</form> -->
-
-
-<!-- <form method="POST" action="/profile/edit">
-    <h1>Name</h1><input name="name" value=<%= profile.name %> >
-    <h1>Contact</h1><input name="contact" value=<%= profile.contact %> >
-    <h1>Whatsapp</h1><input name="whatsapp" value=<%= profile.whatsapp %> >
-    <h1>Telegram</h1><input name="telegram" value=<%= profile.telegram %> >
-    <h1>Instagram</h1><input name="instagram" value=<%= profile.instagram %> >
-    <input type="submit">
-  </form>
-  <a href="/profile">Back</a> -->
-
-  <link rel="stylesheet" href="style.css" />
-  <link
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Edit: <%= profile.name %></title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="style.css" />
+    <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
       crossorigin="anonymous"
-  />
-
-  <section class="vh-100 bg-image"
-  style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp');">
-  <div class="mask d-flex align-items-center h-100 gradient-custom-3">
-    <div class="container h-100">
-      <div class="row d-flex justify-content-center align-items-center h-100">
-        <div class="col-12 col-md-9 col-lg-7 col-xl-6">
-          <div class="card" style="border-radius: 15px;">
-            <div class="card-body p-5">
-
-              <h2 class="text-uppercase text-center mb-3">Update Your Profile</h2>
-              <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                <a href="/profile/edit" ><button type="button" class="btn btn-primary">Reset</button></a>
-                <a href="/profile" ><button type="button" class="btn btn-success">No changes</button></a>
-                <form method="POST" action="/users/logout">
-                  <button type="submit" class="btn btn-warning">Logout</button>
+    />
+  </head>
+  <body>
+    <section class="vh-100 bg-image" style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp');">
+      <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+        <div class="container h-100">
+          <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+              <div class="card" style="border-radius: 15px;">
+                <div class="card-body p-5">
+                  <h2 class="text-uppercase text-center mb-3">Update Your Profile</h2>
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                      <a href="/profile/edit" ><button type="button" class="btn btn-primary">Reset</button></a>
+                      <a href="/profile" ><button type="button" class="btn btn-success">No changes</button></a>
+                      <form method="POST" action="/users/logout">
+                        <button type="submit" class="btn btn-warning">Logout</button>
+                      </form>
+                    </div>
+                    <form method="POST" action="/profile/edit">
+                      <div class="form-outline mb-2">
+                        <label class="form-label" for="form3Example1cg">Name</label>
+                        <input name="name" value=<%= profile.name %> type="text" id="form3Example1cg" class="form-control form-control-lg" />    
+                      </div>
+                      <div class="form-outline mb-2">
+                        <label class="form-label" for="form3Example3cg">Contact</label>
+                        <input  name="contact" value=<%= profile.contact %> type="string" id="form3Example3cg" class="form-control form-control-lg" />
+                      </div>              
+                      <div class="form-outline mb-2">
+                        <label class="form-label" for="form3Example4cg">Whatsapp</label>
+                        <% if ( profile.whatsapp ) { %>
+                          <input name="whatsapp" value=<%= profile.whatsapp %> type="string" id="form3Example4cg" class="form-control form-control-lg" />
+                        <%} else { %>
+                            <input name="whatsapp" type="string" id="form3Example4cg" class="form-control form-control-lg" />
+                        <% } %>
+                      </div>
+                      <div class="form-outline mb-2">
+                        <label class="form-label" for="form3Example4cdg">Telegram</label>
+                        <% if ( profile.telegram ) { %>
+                          <input  name="telegram" value=<%= profile.telegram %>  type="string" id="form3Example4cdg" class="form-control form-control-lg" />
+                        <%} else { %>
+                          <input  name="telegram"  type="string" id="form3Example4cdg" class="form-control form-control-lg" />
+                        <% } %>
+                      </div>
+                      <div class="form-outline mb-2">
+                        <label class="form-label" for="form3Example1cg">Instagram</label>
+                        <% if ( profile.instagram ) { %>
+                          <input name="instagram" value=<%= profile.instagram %> type="text" id="form3Example1cg" class="form-control form-control-lg" />
+                        <%} else { %>
+                          <input name="instagram" type="text" id="form3Example1cg" class="form-control form-control-lg" />  
+                        <% } %>
+                      </div>
+                    <div class="form-outline mb-2">
+                      <label class="form-label" for="form3Example1cg">url</label>
+                      <% if ( profile.url ) { %>
+                        <input name="url" value=<%= profile.url %> type="text" id="form3Example1cg" class="form-control form-control-lg" />
+                      <%} else { %>
+                        <input name="url" type="text" id="form3Example1cg" class="form-control form-control-lg" />  
+                      <% } %>
+                    </div>
+                    <div class="d-flex justify-content-center mb-1 mb-0 ">
+                      <input type="submit" Value="Update Profile" >
+                    </div>
                 </form>
               </div>
-              <form method="POST" action="/profile/edit">
-
-
-
-                <div class="form-outline mb-2">
-                  <label class="form-label" for="form3Example1cg">Name</label>
-                  <input name="name" value=<%= profile.name %> type="text" id="form3Example1cg" class="form-control form-control-lg" />
-                  
-                </div>
-
-                
-                <div class="form-outline mb-2">
-                  <label class="form-label" for="form3Example3cg">Contact</label>
-                  <input  name="contact" value=<%= profile.contact %> type="string" id="form3Example3cg" class="form-control form-control-lg" />
-                </div>
-
-              
-                <div class="form-outline mb-2">
-                  <label class="form-label" for="form3Example4cg">Whatsapp</label>
-                
-                  <% if ( profile.whatsapp ) { %>
-                    <input name="whatsapp" value=<%= profile.whatsapp %> type="string" id="form3Example4cg" class="form-control form-control-lg" />
-                    <%} else { %>
-                      <input name="whatsapp" type="string" id="form3Example4cg" class="form-control form-control-lg" />
-                    <% } %>
-                </div>
-                
-                <div class="form-outline mb-2">
-                  <label class="form-label" for="form3Example4cdg">Telegram</label>
-                  <% if ( profile.telegram ) { %>
-                    <input  name="telegram" value=<%= profile.telegram %>  type="string" id="form3Example4cdg" class="form-control form-control-lg" />
-                    <%} else { %>
-                      <input  name="telegram"  type="string" id="form3Example4cdg" class="form-control form-control-lg" />
-                    <% } %>
-                </div>
-                
-                <div class="form-outline mb-2">
-                   <label class="form-label" for="form3Example1cg">Instagram</label>
-
-                   <% if ( profile.instagram ) { %>
-                    <input name="instagram" value=<%= profile.instagram %> type="text" id="form3Example1cg" class="form-control form-control-lg" />
-                    <%} else { %>
-                      <input name="instagram" type="text" id="form3Example1cg" class="form-control form-control-lg" />  
-                    <% } %>
-                </div>
-
-                <div class="form-outline mb-2">
-                  <label class="form-label" for="form3Example1cg">url</label>
-        
-                  <% if ( profile.url ) { %>
-                   <input name="url" value=<%= profile.url %> type="text" id="form3Example1cg" class="form-control form-control-lg" />
-                   <%} else { %>
-                     <input name="url" type="text" id="form3Example1cg" class="form-control form-control-lg" />  
-                   <% } %>
-               </div>
-
-                <div class="d-flex justify-content-center mb-1 mb-0 ">
-                  <input type="submit" Value="Update Profile" >
-                </div>
-
-
-                <!-- <div style="text-align: center" class="form-outline mb-2">
-                  <% if ( profile.url ) { %>
-                    <img src=<%= profile.url %>  id="ext-profile-pic-edit">
-                    <p>Confirm below</p>
-                    <%} else { %>
-                      <img src="https://images.generated.photos/aNWVduQrveJoCSYCMqZab1M6yGaAOayiL1IRY5b6jQQ/rs:fit:512:512/wm:0.95:sowe:18:18:0.33/czM6Ly9pY29uczgu/Z3Bob3Rvcy1wcm9k/LnBob3Rvcy92M18w/ODAzNDU1LmpwZw.jpg" id="ext-profile-pic">
-                      <p>Confirm below</p>
-                    <% } %>
-                </div> -->
-
-                <!-- <p class="text-center text-muted mb-1 mb-0">Reset Inputs <a href="/profile/edit"
-                  class="fw-bold text-body"><u>Back</u></a></p> -->
-<!-- 
-                <p class="text-center text-muted mb-1 mb-0">Go back without updating <a href="/profile"
-                    class="fw-bold text-body"><u>Back</u></a></p> -->
-
-              </form>
-
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- 
-<div class="d-grid gap-2 d-md-flex justify-content-md-center">
-  <a href="/profile/edit" ><button type="button" class="btn btn-primary">Update your data</button></a>
-  <a href="/<%= profile.rfid %>" ><button type="button" class="btn btn-success">Public View</button></a>
-  <form method="POST" action="/profile/delete">
-    <button type="submit" class="btn btn-danger">Delete Profile</button>
-  </form>
-</div> -->
+  </section>
+  </body>
+</html>
