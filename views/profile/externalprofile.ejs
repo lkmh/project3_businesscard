@@ -11,10 +11,15 @@
     <a href="mailto:<%= profile.email %>" target="_blank" class="links">Email Me</a>
     <% if ( profile.whatsapp ) { %>
     <a href="whatsapp://send?phone=<%= profile.whatsapp %>" target="_blank" class="links">Whatsapp</a>
-    <%} else { %> <% } %> <% if ( profile.telegram ) { %>
+    <%} else { %> <% } %> 
+    <% if ( profile.telegram ) { %>
     <a href="https://telegram.me/<%= profile.telegram %>" target="_blank" class="links">Telegram</a>
-    <%} else { %> <% } %> <% if ( profile.instagram ) { %>
+    <%} else { %> <% } %> 
+    <% if ( profile.instagram ) { %>
     <a href="http://instagram.com/_u/<%= profile.instagram %>" target="_blank" class="links">Instagram</a>
+    <%} else { %> <% } %>
+    <% if ( profile.github ) { %>
+      <a href="http://github.com/<%= profile.github %>" target="_blank" class="links">github</a>
     <%} else { %> <% } %>
   </body>
 </html>

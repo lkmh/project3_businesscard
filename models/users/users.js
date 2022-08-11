@@ -31,6 +31,9 @@ const userSchema = new mongoose.Schema({
     whatsapp: {
         type: String,
     },
+    github: {
+        type: String,
+    },
     url: {
         type: String,
     },

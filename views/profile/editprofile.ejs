@@ -63,17 +63,25 @@
                           <input name="instagram" type="text" id="form3Example1cg" class="form-control form-control-lg" />  
                         <% } %>
                       </div>
-                    <div class="form-outline mb-2">
-                      <label class="form-label" for="form3Example1cg">url</label>
-                      <% if ( profile.url ) { %>
-                        <input name="url" value=<%= profile.url %> type="text" id="form3Example1cg" class="form-control form-control-lg" />
-                      <%} else { %>
-                        <input name="url" type="text" id="form3Example1cg" class="form-control form-control-lg" />  
-                      <% } %>
-                    </div>
-                    <div class="d-flex justify-content-center mb-1 mb-0 ">
-                      <input type="submit" Value="Update Profile" >
-                    </div>
+                      <div class="form-outline mb-2">
+                        <label class="form-label" for="form3Example1cg">Github</label>
+                        <% if ( profile.github ) { %>
+                          <input name="github" value=<%= profile.github %> type="text" id="form3Example1cg" class="form-control form-control-lg" />
+                        <%} else { %>
+                          <input name="github" type="text" id="form3Example1cg" class="form-control form-control-lg" />  
+                        <% } %>
+                      </div>
+                      <div class="form-outline mb-2">
+                        <label class="form-label" for="form3Example1cg">url</label>
+                        <% if ( profile.url ) { %>
+                          <input name="url" value=<%= profile.url %> type="text" id="form3Example1cg" class="form-control form-control-lg" />
+                        <%} else { %>
+                          <input name="url" type="text" id="form3Example1cg" class="form-control form-control-lg" />  
+                        <% } %>
+                      </div>
+                      <div class="d-flex justify-content-center mb-1 mb-0 ">
+                        <input type="submit" Value="Update Profile" >
+                      </div>
                 </form>
               </div>
             </div>

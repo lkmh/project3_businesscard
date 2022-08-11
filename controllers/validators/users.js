@@ -21,6 +21,7 @@ const validators = {
         telegram:  Joi.string().allow('').allow(null),
         instagram:  Joi.string().allow('').allow(null),
         url:  Joi.string().allow('').allow(null),
+        github:  Joi.string().allow('').allow(null),
     }), 
 }
 

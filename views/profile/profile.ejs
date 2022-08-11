@@ -81,6 +81,14 @@
                           <input name="instagram" readonly type="text" id="form3Example1cg" class="form-control form-control-lg" />  
                         <% } %>
                       </div>
+                      <div class="form-outline mb-2">
+                        <label class="form-label" for="form3Example1cg">Github</label>
+                        <% if ( profile.github ) { %>
+                          <input name="github" value=<%= profile.github %> readonly type="text" id="form3Example1cg" class="form-control form-control-lg" />
+                        <%} else { %>
+                          <input name="github" readonly type="text" id="form3Example1cg" class="form-control form-control-lg" />  
+                        <% } %>
+                      </div>
                     </form>
                   </div>
                 </div>
