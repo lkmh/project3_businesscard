@@ -41,7 +41,7 @@ body {
     
 .ext-profile-pic {
     display: block;
-    margin-top:5%;
+    margin-top:10%;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 3%;
@@ -52,10 +52,10 @@ body {
 
 #ext-profile-pic-edit {
     display: block;
-    margin-top:5%;
+    margin-top:7%;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 3%;
+    margin-bottom: 8%;
     height: auto;
     max-width: 150px;
     border-radius: 50%;
@@ -69,21 +69,21 @@ body {
     text-align: center;
     font-weight: bold;
     font-size: 40px;
-    margin-bottom: 3%;
+    margin-bottom: 6%;
 }
     
 .links {
     font-size: 20px;
     text-align: center;
     margin-bottom: 20px;
-    padding: 20px;
+    padding: 50px;
     border: 1px solid white;
     border-width: 3px;
-    width: 250px;
+    width: 280px;
     display: block;
     margin-left: auto;
     margin-right: auto;
-    border-radius: 20px;
+    border-radius: 50px;
 }
 
 a {
@@ -96,12 +96,12 @@ a:hover {
     color: #000;
     background: #fff;
 }
-    
 
-@media only screen and (max-width: 600px) {
+
+@media only screen and (max-width: 768px) {
     .ext-profile-pic {
         display: block;
-        margin-top:20%;
+        margin-top:30%;
         margin-left: auto;
         margin-right: auto;
         margin-bottom: 7%;
