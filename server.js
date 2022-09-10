@@ -11,45 +11,47 @@ const connStr = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PAS
 const multer = require("multer");
 const upload = multer();
 
-const auth_Middleware = require("./middlewares/auth_middleware");
+const auth_Middleware = require("./middlewares/auth_jwt_middleware");
 const userController = require("./controllers/users/users_controller");
 const pageController = require("./controllers/pages/page_controller");
 const profileController = require("./controllers/profiles/profile_controller");
 const cors = require("cors");
-
+app.use(cors({
+  origin: '*'
+}))
 // Set view engine
 app.set("view engine", "ejs");
 
-app.use(express.urlencoded({ extended: true }));
+// app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("public"));
-app.use(cors());
 app.use(methodOverride("X-HTTP-Method-Override"));
-app.use(
-  session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: true,
-    cookie: { secure: false, httpOnly: false, maxAge: 7200000 },
-  })
-);
+// app.use(
+//   session({
+//     secret: process.env.SESSION_SECRET,
+//     resave: false,
+//     saveUninitialized: true,
+//     cookie: { secure: false, httpOnly: false, maxAge: 7200000 },
+//   })
+// );
 
 app.get("/", pageController.showHome);
 
 // Users Routes
-app.get("/users/register", userController.showRegistrationForm);
+// app.get("/users/register", userController.showRegistrationForm);
 app.post("/users/register", userController.register);
-app.get("/users/login", userController.showLoginForm);
+// app.get("/users/login", userController.showLoginForm);
 app.post("/users/login", userController.login);
-app.post("/users/logout", userController.logout);
+// app.post("/users/logout", userController.logout);
 
 // profile
-app.get("/profile", auth_Middleware.isAuthenticated, profileController.showInternalProfile);
-app.get("/profile/edit", auth_Middleware.isAuthenticated, profileController.showEditInternalProfile);
-app.post("/profile/edit", auth_Middleware.isAuthenticated, profileController.editInternalProfile);
-app.post("/profile/delete", auth_Middleware.isAuthenticated, profileController.deleteInternalProfile);
-app.get("/profile/uploadphoto", auth_Middleware.isAuthenticated, profileController.showUploadPhoto);
-app.post("/profile/uploadphoto", auth_Middleware.isAuthenticated, upload.single("uploaded_file"), profileController.uploadPhoto);
+app.get("/profile", auth_Middleware, profileController.showInternalProfile);
+app.get("/profile/edit", auth_Middleware, profileController.showEditInternalProfile);
+app.post("/profile/edit", auth_Middleware, profileController.editInternalProfile);
+app.post("/profile/delete", auth_Middleware, profileController.deleteInternalProfile); //delete 
+// app.get("/profile/uploadphoto", auth_Middleware, profileController.showUploadPhoto);
+app.post("/profile/uploadphoto", auth_Middleware, upload.single("uploaded_file"), profileController.uploadPhoto);
+app.get("/profile/generateVCF", auth_Middleware, profileController.generateVCF);
 
 // External
 app.get("/:rfid", profileController.showExternalProfile);

@@ -1,0 +1,291 @@
+{
+	"info": {
+		"_postman_id": "d40a3133-dfe3-4cf7-8b11-d5312f4f19ba",
+		"name": "Tapcard2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:3000/users/login",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "a@a.com",
+							"type": "default"
+						},
+						{
+							"key": "password",
+							"value": "1",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/users/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users",
+						"login"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				},
+				"description": "Login\n"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/profile",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NjI3NzE4NTAsImRhdGEiOiI2MmY1MGY2ODc5ZTAwYzYwYzhjYTEyYzEiLCJpYXQiOjE2NjI3NjgyNTB9.7BigFsIBQhO0QwS2pOvWm8VZBiupK1RgVi2HNBEuFEA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/profile",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"profile"
+					]
+				},
+				"description": "get profile\n"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/users/register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "rfid",
+							"value": "fe57324c-a618-4d08-b478-4b09b6eecaef",
+							"type": "default"
+						},
+						{
+							"key": "email",
+							"value": "a1@a.com",
+							"type": "default"
+						},
+						{
+							"key": "password",
+							"value": "2",
+							"type": "default"
+						},
+						{
+							"key": "confirm_password",
+							"value": "2",
+							"type": "default"
+						},
+						{
+							"key": "name",
+							"value": "Dan",
+							"type": "default"
+						},
+						{
+							"key": "contact",
+							"value": "123",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/users/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users",
+						"register"
+					]
+				},
+				"description": "register"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/profile/edit",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NjI3NzE4NTAsImRhdGEiOiI2MmY1MGY2ODc5ZTAwYzYwYzhjYTEyYzEiLCJpYXQiOjE2NjI3NjgyNTB9.7BigFsIBQhO0QwS2pOvWm8VZBiupK1RgVi2HNBEuFEA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "Louis",
+							"type": "default"
+						},
+						{
+							"key": "contact",
+							"value": "11",
+							"type": "default"
+						},
+						{
+							"key": "whatsapp",
+							"value": "",
+							"type": "default"
+						},
+						{
+							"key": "telegram",
+							"value": "lk1029",
+							"type": "default"
+						},
+						{
+							"key": "instagram",
+							"value": "",
+							"type": "default"
+						},
+						{
+							"key": "url",
+							"value": "https://ik.imagekit.io/q9sqgqprj/tr:n-ik_ml_thumbnail/user_avatars/aron-visuals-BXOXnQ26B7o-unsplash_jcSGGx1Jd.jpg",
+							"type": "default"
+						},
+						{
+							"key": "github",
+							"value": "lkmh",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/profile/edit",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"profile",
+						"edit"
+					]
+				},
+				"description": "update"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/profile/uploadphoto",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NjI3NzI3MDAsImRhdGEiOiI2MmY1MGY2ODc5ZTAwYzYwYzhjYTEyYzEiLCJpYXQiOjE2NjI3NjkxMDB9.8MNc2yGlh0fJJrT6xtbU9o623Esow-Hatj6gtZRkKnM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "uploaded_file",
+							"type": "file",
+							"src": "/Users/louis/Desktop/biscot/biscoff-html/public/img/product-3.png"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/profile/uploadphoto",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"profile",
+						"uploadphoto"
+					]
+				},
+				"description": "upload photo\n"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/profile/generateVCF",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NjI3NzI3MDAsImRhdGEiOiI2MmY1MGY2ODc5ZTAwYzYwYzhjYTEyYzEiLCJpYXQiOjE2NjI3NjkxMDB9.8MNc2yGlh0fJJrT6xtbU9o623Esow-Hatj6gtZRkKnM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "http://localhost:3000/profile/generateVCF",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"profile",
+						"generateVCF"
+					]
+				},
+				"description": "generate vcf"
+			},
+			"response": []
+		}
+	]
+}

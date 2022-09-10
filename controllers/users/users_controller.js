@@ -3,22 +3,17 @@ const userModel = require("../../models/users/users");
 const userValidators = require("../validators/users");
 const rfidModel = require("../../models/rfid/rfid");
 const counterModel = require("../../models/counters");
+const jwt = require('jsonwebtoken')
 
 const controller = {
-  showRegistrationForm: (req, res) => {
-    res.render("pages/register");
-  },
 
   register: async (req, res) => {
     console.log("register");
     // validations
     const validationResults = userValidators.registerValidator.validate(req.body);
-    console.log(req.body);
     if (validationResults.error) {
-      console.log("validation error");
       // res.send(validationResults.error)
-      res.render("pages/error");
-      return;
+      return res.status(400).json({error: "bad input"})
     }
 
     const validatedResults = validationResults.value;
@@ -28,27 +23,20 @@ const controller = {
     // ensure that password and confirm_password matches
     if (validatedResults.password !== validatedResults.confirm_password) {
       // res.send('passwords do not match')
-      res.render("pages/error");
-      return;
+      return res.status(400).json({error: "bad input"})
     }
     isEmailUsed = await userModel.findOne({ email: validatedResults.email });
 
     if (isEmailUsed) {
       // res.send('Email is in use')
-      res.render("pages/error");
-      return;
+      return res.status(409).json({error: "Email in-use"})
     }
-
-    // ensure that serial number is in the database (to do2. ) amend this
 
     const rfidDocument = await rfidModel.findOneAndUpdate({ rfid: validatedResults.rfid, inUsed: false }, { inUsed: true }, { new: true });
 
     if (!rfidDocument) {
-      console.log(rfidDocument);
-      res.send("RFID not Valid, please purchase one from the store");
-      return;
+      return res.status(500).json({error: "RFID not Valid, please purchase one from the store"})
     }
-
     // hash the password
     const hash = await bcrypt.hash(validatedResults.password, 10);
 
@@ -68,26 +56,20 @@ const controller = {
     } catch (err) {
       console.log(err);
       // res.send('failed to create user')
-      res.render("pages/error");
-      return;
+      return res.status(500).json({error: "Failed to create animal"})
     }
 
-    res.redirect("/users/login");
-  },
-
-  showLoginForm: (req, res) => {
-    res.render("pages/login");
+    return res.status(201).json()
   },
 
   login: async (req, res) => {
+    console.log(req.body)
     // validations here ...
     const validationResults = userValidators.loginValidator.validate(req.body);
-
+    console.log(validationResults)
     if (validationResults.error) {
-      console.log("validation error");
       // res.send(validationResults.error)
-      res.render("pages/error");
-      return;
+      return res.status(400).json({error: "bad inputa"})
     }
 
     const validatedResults = validationResults.value;
@@ -97,62 +79,24 @@ const controller = {
     // get user with email from DB
 
     user = await userModel.findOne({ email: validatedResults.email });
-    console.log("isthere data", user);
     if (!user) {
       // res.send('failed to get user')
-      res.render("pages/error");
-      return;
+      return res.status(500).json({error: "failed to get user"})
     }
+    console.log('userid',user._id)
 
     // use bcrypt to compare the given password with the one store as has in DB
     const pwMatches = await bcrypt.compare(validatedResults.password, user.hash);
 
     if (!pwMatches) {
       // res.send('incorrect password')
-      res.render("pages/error");
-      return;
+      return res.status(401).json({error: "user email or password is incorrect"})
     }
-    console.log("login successful");
-    // log the user in by creating a session
-    req.session.regenerate(function (err) {
-      if (err) {
-        // res.send('unable to regenerate session')
-        res.render("pages/error");
-        return;
-      }
-
-      // store user information in session, typically a user id
-      console.log(user._id);
-      req.session.userId = user._id;
-
-      req.session.save(function (err) {
-        if (err) {
-          res.render("pages/error");
-          return;
-        }
-
-        res.redirect("/profile");
-      });
-    });
-  },
-
-  logout: async (req, res) => {
-    req.session.user = null;
-
-    req.session.save(function (err) {
-      if (err) {
-        res.redirect("/users/login");
-        return;
-      }
-      req.session.regenerate(function (err) {
-        if (err) {
-          res.redirect("/users/login");
-          return;
-        }
-
-        res.redirect("/");
-      });
-    });
+    const token = jwt.sign({
+          exp: Math.floor(Date.now() / 1000) + (60 * 60), // 1 hour
+          data: user._id, //user.local.auth
+          }, process.env.JWT_SECRET)
+      return res.json({token})
   },
 };
 

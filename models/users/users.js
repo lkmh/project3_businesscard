@@ -37,7 +37,13 @@ const userSchema = new mongoose.Schema({
     url: {
         type: String,
     },
-
+    links: [
+        {
+            id: mongoose.Types.ObjectId,
+            title: String,
+            url: String
+        }
+    ]
 
 })
 
