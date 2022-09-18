@@ -53,13 +53,15 @@ const controller = {
       await counterModel.create({
         rfid: validatedResults.rfid,
       });
+      res.status(201).send()
+
     } catch (err) {
       console.log(err);
       // res.send('failed to create user')
-      return res.status(500).json({error: "Failed to create animal"})
+      res.status(500).json({error: "Failed to create animal"})
     }
 
-    return res.status(201).json()
+    
   },
 
   login: async (req, res) => {

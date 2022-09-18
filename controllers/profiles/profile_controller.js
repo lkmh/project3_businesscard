@@ -21,9 +21,9 @@ const controller = {
     // get user data from db using session user
     const profile = await userModel.findById(userId);
     const counterProfile = await counterModel.findOne({ rfid: profile.rfid });
-    profile.count = counterProfile.date.length;
-
-    res.json(profile);
+    const newProfile = JSON.parse(JSON.stringify(profile));
+    newProfile.countView = counterProfile.date.length
+    res.json(newProfile);
   },
   showEditInternalProfile: async (req, res) => {
     let userId = res.locals.userAuth
@@ -32,11 +32,26 @@ const controller = {
   },
   editInternalProfile: async (req, res) => {
     let userId = res.locals.userAuth
+    console.log('1st',req.body)
+    // validations here ...
+    
+    delete req.body["_id"]
+    delete req.body["rfid"]
+    delete req.body["email"]
+    delete req.body["hash"]
+    delete req.body["__v"]
+    delete req.body["links"]
+    delete req.body["countView"]
     const validationResults = userValidators.updateValidator.validate(req.body);
+    console.log('2nd',validationResults)
+    
     if (validationResults.error) {
-      return res.status(404).json({error: "failed to create animal"})
+      return res.status(404).json({error: "failed"})
     }
     const validatedResults = validationResults.value;
+    
+    
+    console.log('Results', validationResults.value)
     const updateDocument = await userModel.findOneAndUpdate({ _id: userId }, validatedResults, { new: true });
     return res.status(200).json("successful")
   },
