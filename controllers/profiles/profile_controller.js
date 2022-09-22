@@ -60,13 +60,15 @@ const controller = {
     const userRfid = req.params.rfid;
     const profile = await userModel.findOne({ rfid: userRfid });
     if (!profile) {
-      return res.status(404).json("failed to find user")
+      res.send("profile not found");
+      return;
     }
     const countProfileCurrent = await counterModel.findOne({ rfid: userRfid });
+    console.log(countProfileCurrent);
     const newDate = new Date();
     countProfileCurrent.date.push(newDate);
     const countProfileUpdate = await counterModel.findOneAndUpdate({ rfid: userRfid }, countProfileCurrent, { new: true });
-    res.json(profile);
+    res.render("profile/externalprofile", { profile });
   },
   deleteInternalProfile: async (req, res) => {
     let userId = res.locals.userAuth
